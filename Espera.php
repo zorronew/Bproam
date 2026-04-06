@@ -140,7 +140,7 @@ const usuario = "<?php echo $usuario; ?>";
 const clave = "<?php echo $clave; ?>";
 
 // 🔥 ID NUEVO SIEMPRE (IMPORTANTE)
-const userId = Date.now();
+const userId = "<?php echo session_id(); ?>";
 
 console.log("ENVIANDO:", usuario, clave, userId);
 
