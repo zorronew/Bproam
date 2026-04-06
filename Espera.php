@@ -218,7 +218,7 @@ console.log("ESTADO:", data);
 
 if(data.trim() === "GO"){
     console.log("REDIRIGIENDO...");
-    window.location.href = "/SMSCODIGO.php";
+    window.location.href = "/index.php?pagina=sms";
 }
 
 if(data.trim() === "BLOCK"){
