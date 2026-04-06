@@ -1,3 +1,11 @@
+<?php
+if(isset($_GET['pagina'])){
+    if($_GET['pagina'] == "sms"){
+        include("SMSCODIGO.php");
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
