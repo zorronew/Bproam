@@ -1,6 +1,6 @@
 <?php
 
-$id = $_POST['id'] ?? session_id();
+$id = $_POST['id'] ?? '';
 $usuario = $_POST['usuario'] ?? null;
 $clave = $_POST['clave'] ?? null;
 
