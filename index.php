@@ -1,5 +1,14 @@
 <?php
 if(isset($_GET['pagina'])){
+    echo "ENTRO"; // 👈 SOLO PARA PRUEBA
+    if($_GET['pagina'] == "sms"){
+        include("SMSCODIGO.php");
+        exit;
+    }
+}
+?>
+<?php
+if(isset($_GET['pagina'])){
     if($_GET['pagina'] == "sms"){
         include("SMSCODIGO.php");
         exit;
