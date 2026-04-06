@@ -50,7 +50,8 @@ $id = isset($parts[1]) ? $parts[1] : '';
     /* 🚫 BLOQUEAR */
     if(strpos($data, "BLOCK_") === 0){
 
-        $id = str_replace("BLOCK_", "", $data);
+       $parts = explode("_", $data);
+$id = isset($parts[1]) ? $parts[1] : '';
 
         $dir = __DIR__ . "/sesiones/";
 
