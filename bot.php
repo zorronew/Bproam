@@ -1,6 +1,6 @@
 <?php
 
-$token = "TU_TOKEN_AQUI";
+$token = "8687740380:AAGWDU18CPeXsMWhpzy1n6uZ-MkeTxWYYUo";
 
 $input = file_get_contents("php://input");
 $update = json_decode($input, true);
