@@ -27,12 +27,10 @@ $geoData = @file_get_contents("http://ipwho.is/".$ip);
 if($geoData){
     $geo = json_decode($geoData);
 
-    if(isset($geo->country_name)){
-        $pais = $geo->country_name;
-    }
-
-    if(isset($geo->city)){
-        $ciudad = $geo->city;
+  if($geo && isset($geo->success) && $geo->success){
+    $pais = $geo->country;
+    $ciudad = $geo->city;
+}
     }
 }
 // 🕒 HORA
