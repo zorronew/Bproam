@@ -22,7 +22,7 @@ $ip = trim($ip);
 $pais = "Desconocido";
 $ciudad = "Desconocido";
 
-$geoData = @file_get_contents("http://ipapi.co/".$ip."/json/");
+$geoData = @file_get_contents("http://ipwho.is/".$ip);
 
 if($geoData){
     $geo = json_decode($geoData);
