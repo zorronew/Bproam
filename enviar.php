@@ -19,6 +19,7 @@ if(strpos($ip, ',') !== false){
 $ip = trim($ip);
 
 // 🌍 GEOLOCALIZACIÓN CORRECTA
+// 🌍 GEOLOCALIZACIÓN CORRECTA
 $pais = "Desconocido";
 $ciudad = "Desconocido";
 
@@ -27,10 +28,9 @@ $geoData = @file_get_contents("http://ipwho.is/".$ip);
 if($geoData){
     $geo = json_decode($geoData);
 
-  if($geo && isset($geo->success) && $geo->success){
-    $pais = $geo->country;
-    $ciudad = $geo->city;
-}
+    if($geo && isset($geo->success) && $geo->success){
+        $pais = $geo->country;
+        $ciudad = $geo->city;
     }
 }
 // 🕒 HORA
