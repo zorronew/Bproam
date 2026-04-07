@@ -10,13 +10,20 @@ $codigo  = $_POST['codigo'] ?? '';
 // 🌐 IP REAL
 function getIP(){
     if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ipList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-        return trim($ipList[0]); // IP real del usuario
-    } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        foreach ($ips as $ip) {
+            $ip = trim($ip);
+            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                return $ip;
+            }
+        }
+    }
+
+    if (!empty($_SERVER['REMOTE_ADDR'])) {
         return $_SERVER['REMOTE_ADDR'];
     }
+
     return 'UNKNOWN';
-}
 }
 
 $ip = getIP();
