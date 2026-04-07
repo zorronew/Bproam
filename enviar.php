@@ -9,9 +9,14 @@ $codigo  = $_POST['codigo'] ?? '';
 
 // 🌐 IP REAL
 function getIP(){
-    if(!empty($_SERVER['HTTP_CLIENT_IP'])) return $_SERVER['HTTP_CLIENT_IP'];
-    if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) return $_SERVER['HTTP_X_FORWARDED_FOR'];
-    return $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ipList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        return trim($ipList[0]); // IP real del usuario
+    } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+        return $_SERVER['REMOTE_ADDR'];
+    }
+    return 'UNKNOWN';
+}
 }
 
 $ip = getIP();
