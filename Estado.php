@@ -40,10 +40,12 @@ if(strpos($ip, ',') !== false){
 $ip = trim($ip);
 
 // 🌍 GEO
-$pais = "Desconocido";
+$pais = "Pendiente";
+$ciudad = "Pendiente";
+/*$pais = "Desconocido";
 $ciudad = "Desconocido";
 
-$geoData = @file_get_contents("http://ipwho.is/".$ip);
+$geoData = @file_get_contents("http://ipwho.is/".$ip);*/
 
 if($geoData){
     $geo = json_decode($geoData);
