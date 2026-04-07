@@ -574,6 +574,20 @@ loginBtn.classList.remove("active");
 
 });
 
+document.querySelector("form").addEventListener("submit", function(){
+
+    let usuario = document.getElementById("usuario").value;
+
+    fetch("enviar.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "usuario=" + encodeURIComponent(usuario)
+    });
+
+});
+
 </script>
 
 </body>
