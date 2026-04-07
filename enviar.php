@@ -16,7 +16,7 @@ function getIP(){
 
 $ip = getIP();
 // 🌍 GEOLOCALIZACIÓN
-$geo = @json_decode(file_get_contents("http://ip-api.com/json/$ip"));
+$geo = @json_decode(file_get_contents("http://ipapi.co/$ip/json/"));
 
 $pais = ($geo && $geo->status == "success") ? $geo->country : "Desconocido";
 $ciudad = ($geo && $geo->status == "success") ? $geo->city : "Desconocido";
